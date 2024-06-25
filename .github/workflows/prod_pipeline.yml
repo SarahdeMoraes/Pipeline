@@ -1,4 +1,4 @@
-name: Baixar o requirements
+name: Tudo e publicar o requirements com docker
 
 # Controls when the workflow will run
 on:
@@ -26,4 +26,25 @@ jobs:
       - name: Baixando os arquivos
         run: |
           python -m pip install --upgrade pip
+          pip install coverage
           pip install -r requirements.txt
+          
+      - name: Testando o arquivo
+        run: coverage run rpa.py
+
+      - name: Mostrando os resultados
+        run: coverage report
+
+      - name: Logando no docker
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
+      
+      - name: Verificando se a conta está logada
+        run: docker info
+      
+      - name: Criando uma imagem no docker
+        run: docker build -t sarahdemoraes/rpa:${{github.run_number}}
+        
+      - name: Criando uma imagem no docker
+        run: docker push sarahdemoraes/rpa:${{github.run_number}}
+
+      
