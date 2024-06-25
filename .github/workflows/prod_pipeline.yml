@@ -42,7 +42,7 @@ jobs:
         run: docker info
       
       - name: Criando uma imagem no docker
-        run: docker build -t sarahdemoraes/rpa:${{github.run_number}}
+        run: docker build -t sarahdemoraes/rpa:${{github.run_number}} .
         
       - name: Criando uma imagem no docker
         run: docker push sarahdemoraes/rpa:${{github.run_number}}
