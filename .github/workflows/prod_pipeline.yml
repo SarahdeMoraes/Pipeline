@@ -3,7 +3,7 @@ name: Tudo e publicar o requirements com docker
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "PROD" branch
-  push:
+  pull_request:
     branches: [ "PROD" ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
